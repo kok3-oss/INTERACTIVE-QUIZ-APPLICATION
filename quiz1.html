@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>India Quiz App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #question {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .btn-container button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #e2e8f0;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-container button.correct {
+      background-color: #38a169;
+      color: white;
+    }
+
+    .btn-container button.wrong {
+      background-color: #e53e3e;
+      color: white;
+    }
+
+    #next-btn {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #4299e1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h1>India Quiz</h1>
+  <div id="question">Loading...</div>
+  <div id="answer-buttons" class="btn-container"></div>
+  <button id="next-btn">Next</button>
+  <div id="result" class="result hidden"></div>
+</div>
+
+<script>
+  // Dynamically load questions (inline instead of external fetch)
+  const questions = [
+    {
+      question: "What is the capital of India?",
+      answers: [
+        { text: "New Delhi", correct: true },
+        { text: "Mumbai", correct: false },
+        { text: "Kolkata", correct: false },
+        { text: "Chennai", correct: false }
+      ]
+    },
+    {
+      question: "Who was the first President of India?",
+      answers: [
+        { text: "Dr. Rajendra Prasad", correct: true },
+        { text: "Sardar Patel", correct: false },
+        { text: "Mahatma Gandhi", correct: false },
+        { text: "Jawaharlal Nehru", correct: false }
+      ]
+    },
+    {
+      question: "Which Indian river is the longest?",
+      answers: [
+        { text: "Ganga", correct: true },
+        { text: "Yamuna", correct: false },
+        { text: "Godavari", correct: false },
+        { text: "Brahmaputra", correct: false }
+      ]
+    },
+    {
+      question: "Which city is known as the Silicon Valley of India?",
+      answers: [
+        { text: "Bengaluru", correct: true },
+        { text: "Hyderabad", correct: false },
+        { text: "Mumbai", correct: false },
+        { text: "Chennai", correct: false }
+      ]
+    }
+  ];
+
+  const questionElement = document.getElementById("question");
+  const answerButtons = document.getElementById("answer-buttons");
+  const nextButton = document.getElementById("next-btn");
+  const resultContainer = document.getElementById("result");
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+
+  function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    resultContainer.classList.add("hidden");
+    nextButton.innerText = "Next";
+    showQuestion();
+  }
+
+  function showQuestion() {
+    resetState();
+    const currentQuestion = questions[currentQuestionIndex];
+    questionElement.innerText = currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+      const button = document.createElement("button");
+      button.innerText = answer.text;
+      button.classList.add("btn");
+      if (answer.correct) {
+        button.dataset.correct = answer.correct;
+      }
+      button.addEventListener("click", selectAnswer);
+      answerButtons.appendChild(button);
+    });
+  }
+
+  function resetState() {
+    nextButton.style.display = "none";
+    answerButtons.innerHTML = "";
+  }
+
+  function selectAnswer(e) {
+    const selectedButton = e.target;
+    const correct = selectedButton.dataset.correct === "true";
+
+    if (correct) score++;
+
+    Array.from(answerButtons.children).forEach(button => {
+      const isCorrect = button.dataset.correct === "true";
+      button.classList.add(isCorrect ? "correct" : "wrong");
+      button.disabled = true;
+    });
+
+    nextButton.style.display = "block";
+  }
+
+  function showScore() {
+    questionElement.classList.add("hidden");
+    answerButtons.classList.add("hidden");
+    resultContainer.classList.remove("hidden");
+    resultContainer.innerText = `🎉 You scored ${score} out of ${questions.length}`;
+    nextButton.innerText = "Restart Quiz";
+    nextButton.style.display = "block";
+  }
+
+  nextButton.addEventListener("click", () => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      showQuestion();
+    } else {
+      showScore();
+      currentQuestionIndex = 0;
+    }
+  });
+
+  startQuiz();
+</script>
+
+</body>
+</html>
