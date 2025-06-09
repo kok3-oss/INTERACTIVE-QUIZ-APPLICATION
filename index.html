@@ -1,17 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-   
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Doe | Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="panel">
-        <h1>Quiz Application </h1>
-        <div class="question" id="ques"></div>
-        <div class="options" id="opt"></div>
-        <button onclick="checkAns()" id="btn">SUBMIT</button>
-        <div id="score"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Hi, I'm John Doe</h1>
+      <p>A Front-End Developer crafting beautiful web experiences.</p>
+      <a href="#projects" class="btn">View My Work</a>
     </div>
+  </section>
+
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container">
+      <h1>John Doe</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>Hello! I'm John, a front-end web developer who loves building clean, user-friendly websites and applications. I specialize in HTML, CSS, and JavaScript, and I enjoy turning designs into responsive, interactive experiences.</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Portfolio Website</h3>
+          <p>A personal portfolio site to showcase my work and skills.</p>
+          <a href="#">View Project</a>
+        </div>
+        <div class="project-card">
+          <h3>Todo App</h3>
+          <p>A simple to-do list app with add, delete, and filter functionality.</p>
+          <a href="#">View Project</a>
+        </div>
+        <div class="project-card">
+          <h3>Weather App</h3>
+          <p>Displays real-time weather using a public API based on your location.</p>
+          <a href="#">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">React</div>
+        <div class="skill">Git</div>
+        <div class="skill">Figma</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Feel free to reach out to me via email or follow me on social media.</p>
+      <ul class="contact-info">
+        <li>Email: johndoe@example.com</li>
+        <li>GitHub: <a href="#">github.com/johndoe</a></li>
+        <li>LinkedIn: <a href="#">linkedin.com/in/johndoe</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 John Doe. All rights reserved.</p>
+    </div>
+  </footer>
+
 </body>
- <script src="script.js"></script>
 </html>
